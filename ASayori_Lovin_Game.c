@@ -6,7 +6,7 @@
 /*   By: jfarinha <jfarinha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 21:20:35 by jfarinha          #+#    #+#             */
-/*   Updated: 2017/12/27 15:01:03 by jfarinha         ###   ########.fr       */
+/*   Updated: 2017/12/27 16:06:36 by jfarinha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		start(char *word, char *usedChars)
 	static char	**words = NULL;
 	struct stat	stbuf;
 
-	bzero(usedChars, 26);
+	ft_bzero(usedChars, 26);
 	getinput(word, "Enter 1 to single player, 2 for 2 players or anything else\
  to quit: ", 46);
 	type = atoi(word);
@@ -83,14 +83,12 @@ int		start(char *word, char *usedChars)
 		}
 		word_index = rand() % word_count;
 		strcpy(word, words[word_index]);
-		putstr(word);
-		putchar('\n');
 	}
 	else if (type == 2)
 	{
-		if (getinput(word, "Player 1 enter a word with out player 2 seeing it:\
- ", 46) <= 1)
-			error("Not a valid word, press Enter to quit!", 1);
+		getinput(word, "Player 1 enter a word with out player 2 seeing it:", 46);
+		while (!strislower(word))
+			getinput(word, "Not a valid word, pls enter a lower case word!: ", 46);
 	}
 	else
 	{
@@ -99,7 +97,6 @@ int		start(char *word, char *usedChars)
 		free(words);
 		return (0);
 	}
-	//clear();
 	return (1);
 }
 
@@ -139,7 +136,7 @@ void	update(char *word, char *usedChars, char display[8][50])
 	run = 1;
 	life = 7;
 	char_count = 0;
-	bzero(found, (sizeof(int) * word_size));
+	ft_bzero(found, (sizeof(int) * word_size));
 	do
 	{
 		draw(display, word, usedChars, found, life);

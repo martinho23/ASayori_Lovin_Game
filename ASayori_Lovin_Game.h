@@ -6,7 +6,7 @@
 /*   By: jfarinha <jfarinha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 21:31:02 by jfarinha          #+#    #+#             */
-/*   Updated: 2017/12/27 11:07:10 by jfarinha         ###   ########.fr       */
+/*   Updated: 2017/12/27 14:39:49 by jfarinha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 
 	int		main(void);
+	int 	strislower(const char *str);
 	int		start(char *word, char *usedChars);
 	int		getinput(char *buff, char *msg, size_t buffsize);
 	char	**ft_strsplit(const char *str, char c, int *words);
@@ -26,6 +27,7 @@
 	void	init_display(char display[8][50]);
 	void	error(char *msg, int bool);
 	void	draw(char disp[8][50],char *word,char *used, int *found, int life);
+	void	ft_bzero(void *p, size_t len);
 
 	#ifdef _WIN32
 		#define clear() system("cls")

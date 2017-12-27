@@ -6,10 +6,11 @@
 /*   By: jfarinha <jfarinha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 05:46:00 by jfarinha          #+#    #+#             */
-/*   Updated: 2017/12/27 15:05:47 by jfarinha         ###   ########.fr       */
+/*   Updated: 2017/12/27 16:08:01 by jfarinha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctype.h>
 #include <string.h>
 #include <unistd.h>
 #include "ASayori_Lovin_Game.h"
@@ -49,6 +50,15 @@ int				getinput(char *buff, char *msg, size_t buffsize)
 	}
 }
 
+int 		strislower(const char *str)
+{
+	unsigned int i;
+	for (i = 0; i < strlen(str); i++)
+		if (!islower(str[i]))
+			return (0);
+	return (1);
+}
+
 void			msg_pause(char *msg)
 {
 	putstr(msg);
@@ -64,16 +74,25 @@ void			error(char *msg, int bool)
 	}
 }
 
-static char		*ft_strsub(const char *src, int pos, int len) 
+static char	*ft_strsub(const char *str, unsigned int start, size_t len)
 {
-  char *dest=NULL;
-  if (len>0) 
-  {
-    dest = (char *) malloc(len);
-    strncat(dest,src+pos,len - 1);
-  }
-  return dest;
+	char	*tmp;
+	size_t	i;
+
+	i = 0;
+	if(!(tmp = (char *)malloc(sizeof(*tmp) * len + 1)))
+		return (NULL);
+	if (!str || !tmp)
+		return (NULL);
+	while (i < len)
+	{
+		tmp[i] = str[i + start];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
 }
+
 
 static int		countwords(const char *str, char c)
 {
@@ -128,3 +147,11 @@ char			**ft_strsplit(const char *str, char c, int *words)
 	return (tmp);
 }
 
+void			ft_bzero(void *p, size_t len)
+{
+	while (len)
+	{
+		len--;
+		((char *)p)[len] = '\0';
+	}
+}
