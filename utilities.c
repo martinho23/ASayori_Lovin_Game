@@ -6,7 +6,7 @@
 /*   By: jfarinha <jfarinha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 05:46:00 by jfarinha          #+#    #+#             */
-/*   Updated: 2017/12/27 16:08:01 by jfarinha         ###   ########.fr       */
+/*   Updated: 2017/12/27 19:39:32 by jfarinha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ static	void	split(char **tmp, const char *str, int words, char c)
 		e = s + 1;
 		while (str[e] != c && str[e])
 			e++;
-		tmp[i] = ft_strsub(str, s, (e - s));
+		tmp[i] = ft_strsub(str, s, (e - s - 1));
 		s = e;
 		e = 0;
 		i++;

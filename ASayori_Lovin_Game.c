@@ -6,7 +6,7 @@
 /*   By: jfarinha <jfarinha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 21:20:35 by jfarinha          #+#    #+#             */
-/*   Updated: 2017/12/27 16:06:36 by jfarinha         ###   ########.fr       */
+/*   Updated: 2017/12/27 19:31:44 by jfarinha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ int		start(char *word, char *usedChars)
 			(fstat(fd, &stbuf) != 0) || (!S_ISREG(stbuf.st_mode)));
 			error("Couldn't load the file, press Enter to exit\n", \
 			!(buffer = (char *)malloc(sizeof(char) * stbuf.st_size + 1)));
-			error("Couldn't read the file, press Enter to exit", \
+			error("Couldn't read the file, press Enter to exit!", \
 			!read(fd, buffer, stbuf.st_size));
 			buffer[stbuf.st_size] = '\0';
 			close(fd);
-			words = ft_strsplit(buffer, '\n', &word_count);
+			error("Couln't split the words, Press Enter to exit!", \
+			!(words = ft_strsplit(buffer, '\n', &word_count)));
 			srand(time(NULL));
 			free(buffer);
 		}
