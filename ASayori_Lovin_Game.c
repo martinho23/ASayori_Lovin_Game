@@ -6,7 +6,7 @@
 /*   By: jfarinha <jfarinha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 21:20:35 by jfarinha          #+#    #+#             */
-/*   Updated: 2017/12/27 19:31:44 by jfarinha         ###   ########.fr       */
+/*   Updated: 2017/12/28 21:13:37 by jfarinha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,25 @@ int		start(char *word, char *usedChars)
 			char		*buffer;
 
 			fd = open("dictionary.txt", O_RDONLY);
-			error("Couldn't open dictionary.txt press Enter to exit!\n", fd == -1);
-			error("dictionary.txt is not a valid file, press Enter to exit\n", \
+			error("Couldn't open dictionary.txt press Enter to exit!", fd == -1);
+			error("dictionary.txt is not a valid file, press Enter to exit!", \
 			(fstat(fd, &stbuf) != 0) || (!S_ISREG(stbuf.st_mode)));
-			error("Couldn't load the file, press Enter to exit\n", \
+			error("Couldn't load the file, press Enter to exit", \
 			!(buffer = (char *)malloc(sizeof(char) * stbuf.st_size + 1)));
 			error("Couldn't read the file, press Enter to exit!", \
-			!read(fd, buffer, stbuf.st_size));
+			(read(fd, buffer, stbuf.st_size) == EOF));
 			buffer[stbuf.st_size] = '\0';
 			close(fd);
 			error("Couln't split the words, Press Enter to exit!", \
 			!(words = ft_strsplit(buffer, '\n', &word_count)));
+			error("The dictionary.txt file is empty, press Enter to quit!", (word_count == 0));
 			srand(time(NULL));
 			free(buffer);
 		}
 		word_index = rand() % word_count;
+		error("There is a word in your dictionary.txt that is not valide, all the\
+ words must be lowercase letters ONLY, press Enter to exit!", \
+		!strislower(words[word_index]));
 		strcpy(word, words[word_index]);
 	}
 	else if (type == 2)
